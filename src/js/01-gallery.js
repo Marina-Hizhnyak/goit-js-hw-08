@@ -3,7 +3,6 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import '../css/common.css';
 import '../css/01-gallery.css';
-// Change code below this line
 
 const createItemsMarkup = galleryItems
   .map(({ preview, original, description }) => {
@@ -24,9 +23,3 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   doubleTapZoom: 1,
 });
-// galleryContainerEl.addEventListener('click', event => {
-//   event.preventDefault();
-//   if (!event.target.classList.contains('gallery__image')) {
-//     return;
-//   }
-// });
