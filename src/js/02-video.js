@@ -8,9 +8,10 @@ let currentTime = localStorage.getItem(STORAGE_KEY);
 
 function getTimeCurrentVideo(data) {
     let timeInSeconds = data.seconds;
-    localStorage.setItem(STORAGE_KEY, timeInSeconds);
+    localStorage.setItem(STORAGE_KEY, `${timeInSeconds}`);
 };
 
 player.on('timeupdate', throttle(getTimeCurrentVideo, 1000));
 
-player.setCurrentTime(currentTime)
+let newNime = Number(currentTime)
+player.setCurrentTime(newNime)
