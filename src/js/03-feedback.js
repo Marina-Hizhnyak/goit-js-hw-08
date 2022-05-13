@@ -9,7 +9,6 @@ const refs = {
     message: document.querySelector(".feedback-form textarea")
 
 };
-// const formData = {};
 const STORAGE_KEY = "feedback-form-state";
 
 refs.form.addEventListener("submit", onFormSubmit);
@@ -19,35 +18,30 @@ populateTextarea();
 
 function onFormSubmit(e) {
     e.preventDefault();
-    const formData = new FormData(refs.form);
-    formData.forEach((value, key) => {
-        console.log({ key, value });
-    });
-    e.target.reset();
-    localStorage.removeItem(STORAGE_KEY);
+  const email = refs.email.value;
+  const message = refs.message.value;
+  console.log({ email, message });
+  localStorage.removeItem(STORAGE_KEY);
+  e.target.reset();
 }
-
 
  function populateTextarea() {
   const savedMessage = localStorage.getItem(STORAGE_KEY);
 
      
    if (savedMessage) {
-       const getObject = JSON.parse(savedMessage);
-       if (getObject) {
-           Object.keys(getObject).forEach((key) => {
-                refs.form.elements[key].value = getObject[key];
-            });
-        }
+
+    const tempMailData = JSON.parse(localStorage.getItem(STORAGE_KEY)).email;
+  const tempMessageData = JSON.parse(localStorage.getItem(STORAGE_KEY)).message;
+
+  refs.email.value = tempMailData;
+  refs.message.value = tempMessageData;
     }  
  }
 function onTextareaInput(e) {
 
-    const {name, value} = e.target
-    const formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    
-    formData[name] = value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-    
+  const email = refs.email.value;
+  const message = refs.message.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ email, message }));
 }
 
